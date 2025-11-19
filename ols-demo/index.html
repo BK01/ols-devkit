@@ -1215,17 +1215,7 @@
 				layers: '0'
 			});
 		baseLayers['BC Topographic Base'] = bcTopoBaseLayer;
-
-		var trimLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/pub/wms',
-			{
-				maxZoom: 20,
-				layers: 'pub:WHSE_BASEMAPPING.TRIM_WATER_LINES,pub:WHSE_BASEMAPPING.TRIM_TRANSPORTATION_LINES,pub:WHSE_BASEMAPPING.TRIM_WATER_POINTS,pub:WHSE_BASEMAPPING.TRIM_TRANSPORTATION_POINTS,pub:WHSE_BASEMAPPING.TRIM_CONTOUR_POINTS',
-				styles: '3345,3334,,3344,3333,3332',
-				format: 'image/png',
-				transparent: true
-			});
-		overlays['TRIM'] = trimLayer;
-
+		
 		var siteLayer = new L.layerJSON({
 			url: gcApi + "sites/within.json?excludeUnits=true&brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
 			minZoom: 14,
@@ -1410,6 +1400,63 @@
 			});
 		overlays['BC Digital Road Atlas'] = draLayer;
 
+		var deadEndLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=DE&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'DE',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 10,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			dataToMarker: function(data) {
+				return L.GeoJSON.geometryToLayer(data,  {
+						color: 'purple',
+						lineCap: 'butt',
+						weight: 2,
+						dashArray: '3 3'
+				});
+			}
+		});
+		overlays["Dead Ends"] = deadEndLayer;
+		
+		var segIdLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=ID&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'ID',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 12,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			buildIcon: function(data) {
+				return getNavInfoIcon(data.properties);
+			}
+		});
+		overlays["Internal Segment Ids"] = segIdLayer;
+		
 		var gnsLayer = new L.layerJSON({
 			url: "https://apps.gov.bc.ca/pub/bcgnws/names/official/inside"
 				+ "?itemsPerPage=50&sortBy=name&outputFormat=json&outputSRS=4326"
@@ -1429,6 +1476,16 @@
 		});
 		overlays['BC Geographical Names'] = gnsLayer;
 
+		var trimLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/pub/wms',
+			{
+				maxZoom: 20,
+				layers: 'pub:WHSE_BASEMAPPING.TRIM_WATER_LINES,pub:WHSE_BASEMAPPING.TRIM_TRANSPORTATION_LINES,pub:WHSE_BASEMAPPING.TRIM_WATER_POINTS,pub:WHSE_BASEMAPPING.TRIM_TRANSPORTATION_POINTS,pub:WHSE_BASEMAPPING.TRIM_CONTOUR_POINTS',
+				styles: '3345,3334,,3344,3333,3332',
+				format: 'image/png',
+				transparent: true
+			});
+		overlays['TRIM'] = trimLayer;
+		
 		var impactorLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=IMP&bbox={lon1},{lat1},{lon2},{lat2}",
 			callData: function(bbox, callback) {
@@ -1611,37 +1668,6 @@
 		});
 		overlays["Truck Routes"] = truckRouteLayer;
 
-		var deadEndLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=DE&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'DE',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 10,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			dataToMarker: function(data) {
-				return L.GeoJSON.geometryToLayer(data,  {
-						color: 'purple',
-						lineCap: 'butt',
-						weight: 2,
-						dashArray: '3 3'
-				});
-			}
-		});
-		overlays["Dead Ends"] = deadEndLayer;
-
 		var trafficLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=TF&departure={departure}&bbox={lon1},{lat1},{lon2},{lat2}",
 			callData: function(bbox, callback) {
@@ -1714,32 +1740,6 @@
 			}
 		});
 		overlays["Ferry Terminals"] = ferryTerminalLayer;
-
-		var segIdLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=ID&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'ID',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 12,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function(data) {
-				return getNavInfoIcon(data.properties);
-			}
-		});
-		overlays["Internal Segment Ids"] = segIdLayer;
 
 		if(queryParams.get('test_results')) {
 			getAndAddTestResults(queryParams.get('test_results'));

@@ -1400,6 +1400,32 @@
 			});
 		overlays['BC Digital Road Atlas'] = draLayer;
 
+		var segIdLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=ID&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'ID',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 14,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			buildIcon: function(data) {
+				return getNavInfoIcon(data.properties);
+			}
+		});
+		overlays["Internal Segment Ids"] = segIdLayer;
+		
 		var deadEndLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=DE&bbox={lon1},{lat1},{lon2},{lat2}",
 			callData: function(bbox, callback) {
@@ -1430,32 +1456,6 @@
 			}
 		});
 		overlays["Dead Ends"] = deadEndLayer;
-		
-		var segIdLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=ID&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'ID',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 12,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function(data) {
-				return getNavInfoIcon(data.properties);
-			}
-		});
-		overlays["Internal Segment Ids"] = segIdLayer;
 		
 		var gnsLayer = new L.layerJSON({
 			url: "https://apps.gov.bc.ca/pub/bcgnws/names/official/inside"

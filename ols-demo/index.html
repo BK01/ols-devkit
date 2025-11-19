@@ -1391,6 +1391,25 @@
 			});
 		overlays['ParcelMap BC - Outlined'] = parcelLayer;
 
+		var gnsLayer = new L.layerJSON({
+			url: "https://apps.gov.bc.ca/pub/bcgnws/names/official/inside"
+				+ "?itemsPerPage=50&sortBy=name&outputFormat=json&outputSRS=4326"
+				+ "&bbox={lon1},{lat1},{lon2},{lat2}",
+			minZoom: 9,
+			caching: false,
+			propertyItems: "features",
+			propertyId: "properties.uri",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			buildIcon: function(data, title) {	// make icon from data
+				return L.divIcon({html: data.properties.name, className: "gnsLabel"});
+			},
+			onEachMarker: function(feature, layer) {
+				//layer.bindPopup(makePopupText(feature.properties));
+			}
+		});
+		overlays['BC Geographical Names'] = gnsLayer;
+		
 		var draLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/ows?',
 			{
 				maxZoom: 20,
@@ -1456,25 +1475,6 @@
 			}
 		});
 		overlays["Dead Ends"] = deadEndLayer;
-		
-		var gnsLayer = new L.layerJSON({
-			url: "https://apps.gov.bc.ca/pub/bcgnws/names/official/inside"
-				+ "?itemsPerPage=50&sortBy=name&outputFormat=json&outputSRS=4326"
-				+ "&bbox={lon1},{lat1},{lon2},{lat2}",
-			minZoom: 9,
-			caching: false,
-			propertyItems: "features",
-			propertyId: "properties.uri",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function(data, title) {	// make icon from data
-				return L.divIcon({html: data.properties.name, className: "gnsLabel"});
-			},
-			onEachMarker: function(feature, layer) {
-				//layer.bindPopup(makePopupText(feature.properties));
-			}
-		});
-		overlays['BC Geographical Names'] = gnsLayer;
 
 		var trimLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/pub/wms',
 			{

@@ -1603,31 +1603,6 @@
 		});
 		overlays["Navigation Info"] = navInfoLayer;
 
-		var eventLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=EV&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'EV',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 4,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function(data) {
-				return getNavInfoIcon(data.properties);
-			}
-		});
-		overlays["Open511 Events (demo only)"] = eventLayer;
 
 		var truckRouteLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=TRK&bbox={lon1},{lat1},{lon2},{lat2}",
@@ -1659,43 +1634,6 @@
 			}
 		});
 		overlays["Truck Routes"] = truckRouteLayer;
-
-		var trafficLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=TF&departure={departure}&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'TF',
-						departure: date2String($('#time').timepicker('getTime', $('#date').datepicker('getDate'))),
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 13,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			dataToMarker: function(data) {
-				return L.GeoJSON.geometryToLayer(data);
-			},
-			onEachMarker: function(feature, layer) {
-				if(feature.properties.subType == "SLOWEST") {
-					color = '#FF0000';
-				} else if(feature.properties.subType == "SLOWER") {
-					color = '#FF6600';
-				} else if(feature.properties.subType == "SLOW") {
-					color = '#FFAA00';
-				}
-				layer.setStyle({color:color, weight:4, opacity: 0.75});
-			}
-		});
-		overlays["Traffic (demo only)"] = trafficLayer;
 
 		var ferryTerminalLayer = new L.layerJSON({
 			callData: function(bbox, callback) {
@@ -1733,6 +1671,69 @@
 		});
 		overlays["Ferry Terminals"] = ferryTerminalLayer;
 
+				var trafficLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=TF&departure={departure}&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'TF',
+						departure: date2String($('#time').timepicker('getTime', $('#date').datepicker('getDate'))),
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 13,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			dataToMarker: function(data) {
+				return L.GeoJSON.geometryToLayer(data);
+			},
+			onEachMarker: function(feature, layer) {
+				if(feature.properties.subType == "SLOWEST") {
+					color = '#FF0000';
+				} else if(feature.properties.subType == "SLOWER") {
+					color = '#FF6600';
+				} else if(feature.properties.subType == "SLOW") {
+					color = '#FFAA00';
+				}
+				layer.setStyle({color:color, weight:4, opacity: 0.75});
+			}
+		});
+		overlays["Traffic (demo only)"] = trafficLayer;
+
+		var eventLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=EV&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'EV',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 4,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			buildIcon: function(data) {
+				return getNavInfoIcon(data.properties);
+			}
+		});
+		overlays["Open511 Events (demo only)"] = eventLayer;
+		
 		if(queryParams.get('test_results')) {
 			getAndAddTestResults(queryParams.get('test_results'));
 		}

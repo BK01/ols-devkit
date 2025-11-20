@@ -1420,6 +1420,60 @@
 			});
 		overlays['BC Digital Road Atlas'] = draLayer;
 
+		var itnHardRestrictionLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=HR&restrictionSource=ITN&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'HR',
+						restrictionSource: 'ITN',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 10,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			buildIcon: function(data) {
+				return getNavInfoIcon(data.properties);
+			}
+		});
+		overlays["ITN Hard Restrictions"] = itnHardRestrictionLayer;
+
+		var rdmHardRestrictionLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=HR&restrictionSource=RDMbbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'HR',
+						restrictionSource: 'RDM',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 10,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			buildIcon: function(data) {
+				return getNavInfoIcon(data.properties);
+			}
+		});
+		overlays["RDM Hard Restrictions"] = rdmHardRestrictionLayer;		
+		
 		var segIdLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=ID&bbox={lon1},{lat1},{lon2},{lat2}",
 			callData: function(bbox, callback) {
@@ -1547,60 +1601,6 @@
 			}
 		});
 		overlays["Navigation Info"] = navInfoLayer;
-
-		var itnHardRestrictionLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=HR&restrictionSource=ITN&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'HR',
-						restrictionSource: 'ITN',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 10,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function(data) {
-				return getNavInfoIcon(data.properties);
-			}
-		});
-		overlays["ITN Hard Restrictions"] = itnHardRestrictionLayer;
-
-		var rdmHardRestrictionLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=HR&restrictionSource=RDMbbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'HR',
-						restrictionSource: 'RDM',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 10,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function(data) {
-				return getNavInfoIcon(data.properties);
-			}
-		});
-		overlays["RDM Hard Restrictions"] = rdmHardRestrictionLayer;
 
 		var eventLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=EV&bbox={lon1},{lat1},{lon2},{lat2}",

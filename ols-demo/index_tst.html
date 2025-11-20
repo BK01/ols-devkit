@@ -1690,6 +1690,8 @@
 		});
 		overlays["Ferry Terminals"] = ferryTerminalLayer;
 
+		overlays["<hr style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
+		
 		var trafficLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=TF&departure={departure}&bbox={lon1},{lat1},{lon2},{lat2}",
 			callData: function(bbox, callback) {

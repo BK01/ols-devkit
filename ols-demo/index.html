@@ -1476,16 +1476,6 @@
 			}
 		});
 		overlays["Dead Ends"] = deadEndLayer;
-
-		var trimLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/pub/wms',
-			{
-				maxZoom: 20,
-				layers: 'pub:WHSE_BASEMAPPING.TRIM_WATER_LINES,pub:WHSE_BASEMAPPING.TRIM_TRANSPORTATION_LINES,pub:WHSE_BASEMAPPING.TRIM_WATER_POINTS,pub:WHSE_BASEMAPPING.TRIM_TRANSPORTATION_POINTS,pub:WHSE_BASEMAPPING.TRIM_CONTOUR_POINTS',
-				styles: '3345,3334,,3344,3333,3332',
-				format: 'image/png',
-				transparent: true
-			});
-		overlays['TRIM'] = trimLayer;
 		
 		var impactorLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=IMP&bbox={lon1},{lat1},{lon2},{lat2}",

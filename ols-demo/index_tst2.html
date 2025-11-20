@@ -1376,7 +1376,7 @@
 		});
 		overlays["Intersections"] = intLayer;
 
-    overlays["<hr class='layer-separator' style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
+    	overlays["<hr class='layer-separator' style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
 
 		var gnsLayer = new L.layerJSON({
 			url: "https://apps.gov.bc.ca/pub/bcgnws/names/official/inside"
@@ -1698,7 +1698,6 @@
 		});
 		overlays["Ferry Terminals"] = ferryTerminalLayer;
 
-		/* blank layer separator */
 		overlays["<hr class='layer-separator' style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
 		
 		var trafficLayer = new L.layerJSON({

@@ -1770,24 +1770,25 @@
 
 		// Remove the blank layer checkbox
 		setTimeout(() => {
-        const separators = document.querySelectorAll(
-            ".leaflet-control-layers-overlays label hr.layer-separator"
-        );
-    
-        separators.forEach(hr => {
-            const label = hr.closest("label");
-            if (!label) return;
-    
-            // Remove checkbox
-            const checkbox = label.querySelector("input[type='checkbox']");
-            if (checkbox) checkbox.remove();
-    
-            // Remove leftover blank text nodes
-            label.childNodes.forEach(node => {
-                if (node.nodeType === Node.TEXT_NODE) node.remove();
-            });
-        });
-    }, 50);
+		  const separators = document.querySelectorAll(
+		    ".leaflet-control-layers-overlays label hr.layer-separator"
+		  );
+		
+		  separators.forEach(hr => {
+		    const label = hr.closest("label");
+		    if (!label) return;
+		
+		    const checkbox = label.querySelector("input[type='checkbox']");
+		    if (checkbox) checkbox.remove();
+		
+		    // Clean up any empty text nodes leftover
+		    label.childNodes.forEach(node => {
+		      if (node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) {
+		        node.remove();
+		      }
+		    });
+		  });
+		}, 50);
 
 		// turn restriction visualition markers
 		var turnMarkers = [];

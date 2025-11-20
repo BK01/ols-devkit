@@ -1420,10 +1420,10 @@
 			});
 		overlays['Municipalities - Outlined'] = muniLayer;
 
-		var edLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.EBC_ELECTORAL_DISTS_BS11_SVW/ows?SERVICE=WMS&',
+		var edLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.EBC_PROV_ELECTORAL_DIST_SVW/ows?SERVICE=WMS&',
 			{
 				maxZoom: 20,
-				styles: 10262,
+				styles: 424,
 				layers: 'pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP',
 				transparent: true,
 				format: 'image/png'

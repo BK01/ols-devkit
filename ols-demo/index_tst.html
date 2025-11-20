@@ -361,6 +361,23 @@
 		#configDialog table th:first-child {
 			width: 110px;
 		}
+		/* Hide the checkbox for the separator row */
+		.leaflet-control-layers .layer-separator input {
+		    display: none !important;
+		}
+
+		/* Hide the text label spacing */
+		.leaflet-control-layers .layer-separator span {
+		    display: none !important;
+		}
+
+		/* Keep only the <hr> visible */
+		.leaflet-control-layers .layer-separator hr {
+		    margin: 6px 0;
+		    border: 0;
+		    border-top: 1px solid #ccc;
+		    pointer-events: none;
+		}
 		.leaflet-marker-icon .number{
 			position: relative;
 			top: -36px;
@@ -1690,7 +1707,8 @@
 		});
 		overlays["Ferry Terminals"] = ferryTerminalLayer;
 
-		overlays["<hr style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
+		/* blank layer separator */
+		overlays[<span class='layer-separator'><hr></span>"] = L.layerGroup();  
 		
 		var trafficLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=TF&departure={departure}&bbox={lon1},{lat1},{lon2},{lat2}",

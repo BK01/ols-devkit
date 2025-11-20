@@ -1756,7 +1756,7 @@
 		if(queryParams.get('test_results')) {
 			getAndAddTestResults(queryParams.get('test_results'));
 		}
-		var layerControl = L.control.layers(baseLayers, overlays, demoLayers).addTo(map);
+		var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
 
 		// turn restriction visualition markers
 		var turnMarkers = [];

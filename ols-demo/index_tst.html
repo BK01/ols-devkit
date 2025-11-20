@@ -361,23 +361,6 @@
 		#configDialog table th:first-child {
 			width: 110px;
 		}
-		/* Hide the checkbox for the separator row */
-		.leaflet-control-layers .layer-separator input {
-		    display: none !important;
-		}
-
-		/* Hide the text label spacing */
-		.leaflet-control-layers .layer-separator span {
-		    display: none !important;
-		}
-
-		/* Keep only the <hr> visible */
-		.leaflet-control-layers .layer-separator hr {
-		    margin: 6px 0;
-		    border: 0;
-		    border-top: 1px solid #ccc;
-		    pointer-events: none;
-		}
 		.leaflet-marker-icon .number{
 			position: relative;
 			top: -36px;
@@ -1708,7 +1691,7 @@
 		overlays["Ferry Terminals"] = ferryTerminalLayer;
 
 		/* blank layer separator */
-		overlays[<span class='layer-separator'><hr></span>"] = L.layerGroup();  
+		overlays["<hr id='demo-separator' style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
 		
 		var trafficLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=TF&departure={departure}&bbox={lon1},{lat1},{lon2},{lat2}",
@@ -1777,6 +1760,26 @@
 			getAndAddTestResults(queryParams.get('test_results'));
 		}
 		var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+		// Remove the blank layer checkbox
+		setTimeout(() => {
+		    const separatorEntry = document.querySelector(
+		        ".leaflet-control-layers-overlays label hr#demo-separator"
+		    );
+		
+		    if (separatorEntry) {
+		        const label = separatorEntry.closest("label");
+		
+		        // Remove the checkbox
+		        const checkbox = label.querySelector("input[type='checkbox']");
+		        if (checkbox) checkbox.remove();
+		
+		        // Remove any leftover blank text node
+		        label.childNodes.forEach(node => {
+		            if (node.nodeType === Node.TEXT_NODE) node.remove();
+		        });
+		    }
+		}, 50);
 
 		// turn restriction visualition markers
 		var turnMarkers = [];

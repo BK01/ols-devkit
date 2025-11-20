@@ -969,7 +969,6 @@
 
 		var baseLayers = {};
 		var overlays = {};
-		var demoLayers = {};
 
 		// define icons to use for markers
 		var siteIcon = L.icon({
@@ -1726,7 +1725,7 @@
 				layer.setStyle({color:color, weight:4, opacity: 0.75});
 			}
 		});
-		demoLayers["Traffic (demo only)"] = trafficLayer;
+		overlays["Traffic (demo only)"] = trafficLayer;
 
 		var eventLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=EV&bbox={lon1},{lat1},{lon2},{lat2}",
@@ -1752,7 +1751,7 @@
 				return getNavInfoIcon(data.properties);
 			}
 		});
-		demoLayers["Open511 Events (demo only)"] = eventLayer;
+		overlays["Open511 Events (demo only)"] = eventLayer;
 		
 		if(queryParams.get('test_results')) {
 			getAndAddTestResults(queryParams.get('test_results'));

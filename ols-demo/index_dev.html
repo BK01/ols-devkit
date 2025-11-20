@@ -1410,6 +1410,25 @@
 			});
 		overlays['ParcelMap BC - Outlined'] = parcelLayer;
 
+		var muniLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP/ows?SERVICE=WMS&',
+			{
+				maxZoom: 20,
+				styles: 410,
+				layers: 'pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['Municipalities - Outlined'] = muniLayer;
+
+		var edLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.EBC_ELECTORAL_DISTS_BS11_SVW/ows?SERVICE=WMS&',
+			{
+				maxZoom: 20,
+				styles: 10262,
+				layers: 'pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['Provincial Electoral Districts'] = edLayer;
 		
 		var draLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/ows?',
 			{

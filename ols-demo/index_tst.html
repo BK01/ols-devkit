@@ -49,10 +49,13 @@
 		#tabs {
 			height: 100%;
 			width: 425px;
-			background-color: transparent;
+			background-color: white;
 			display: flex;
 			flex-direction: column;
 			flex-wrap: nowrap;
+			overflow-y: auto;
+			overflow-x: hidden;
+			min-height: 0;
 		}
 		#hideButton {
 			border-color: lightSlateGrey;
@@ -91,11 +94,12 @@
 			background-color: white;
 			border-right: 1px solid lightSlateGrey;
 			flex: 1 1 1px;
-			overflow: hidden;
+			overflow: visible;
+			min-height: 0;
 		}
 		.tab-pane {
 			padding: 10px;
-			height: 100%;
+			height: auto;
 		}
 		.tag-input-group {
 			vertical-align: top;

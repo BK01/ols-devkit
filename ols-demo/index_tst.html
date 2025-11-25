@@ -1346,7 +1346,7 @@
 
 		var occLayer = new L.layerJSON({
 			url: gcApi + "occupants/within.json?brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
-			minZoom: 1,
+			minZoom: 14,
 			caching: false,
 			propertyItems: "features",
 			propertyId: "properties.fullAddress",
@@ -1403,7 +1403,7 @@
 		
 		var parcelIdLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
 			{
-				maxZoom: 20,
+				maxZoom: 14,
 				maxFeatures: 200,
 				styles: 7834,
 				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
@@ -1414,7 +1414,7 @@
 
 		var parcelLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
 			{
-				maxZoom: 20,
+				maxZoom: 14,
 				styles: 5898,
 				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
 				transparent: true,
@@ -1464,7 +1464,7 @@
 					success: callback
 				});
 			},
-			minZoom: 18,
+			minZoom: 16,
 			caching: false,
 			propertyItems: "features",
 			propertyId: null,

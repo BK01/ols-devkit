@@ -1403,7 +1403,7 @@
 		
 		var parcelIdLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
 			{
-				maxZoom: 14,
+				minZoom: 14,
 				maxFeatures: 200,
 				styles: 7834,
 				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
@@ -1414,7 +1414,7 @@
 
 		var parcelLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
 			{
-				maxZoom: 14,
+				minZoom: 14,
 				styles: 5898,
 				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
 				transparent: true,

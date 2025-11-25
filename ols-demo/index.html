@@ -49,10 +49,13 @@
 		#tabs {
 			height: 100%;
 			width: 425px;
-			background-color: transparent;
+			background-color: white;
 			display: flex;
 			flex-direction: column;
 			flex-wrap: nowrap;
+			overflow-y: auto;
+			overflow-x: hidden;
+			min-height: 0;
 		}
 		#hideButton {
 			border-color: lightSlateGrey;
@@ -91,11 +94,12 @@
 			background-color: white;
 			border-right: 1px solid lightSlateGrey;
 			flex: 1 1 1px;
-			overflow: hidden;
+			overflow: visible;
+			min-height: 0;
 		}
 		.tab-pane {
 			padding: 10px;
-			height: 100%;
+			height: auto;
 		}
 		.tag-input-group {
 			vertical-align: top;
@@ -200,11 +204,11 @@
 		}
 		#routerList {
 			flex: 0 0 auto;
-			overflow-y: scroll;
+			overflow-y: auto;
 			border: 1px solid LightSteelBlue;
 			border-radius: 4px 0px 0px 4px;
 			padding: 2px;
-			max-height: 35%;
+			max-height: 200px;
 			margin-bottom: 4px;
 		}
 		button.reorder {
@@ -282,7 +286,7 @@
 			border-left: 2px dashed white;
 		}
 		#directions {
-			overflow-y: scroll;
+			overflow-y: visible;
 		}
 		.direction {
 			padding: 5px;
@@ -370,7 +374,13 @@
 			width: 25px;
 			text-align: center;
 		}
-
+	    /* Keep only the <hr> visible */
+	    .leaflet-control-layers .layer-separator hr {
+	        margin: 6px 0;
+	        border: 0;
+	        border-top: 1px solid #ccc;
+	        pointer-events: none;
+	    }
 		/* For leaflet-zoom-min.js */
 		.leaflet-control-zoom-min {
 			text-indent: -999em;
@@ -1336,7 +1346,7 @@
 
 		var occLayer = new L.layerJSON({
 			url: gcApi + "occupants/within.json?brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
-			minZoom: 1,
+			minZoom: 14,
 			caching: false,
 			propertyItems: "features",
 			propertyId: "properties.fullAddress",
@@ -1370,6 +1380,8 @@
 		});
 		overlays["Intersections"] = intLayer;
 
+    	overlays["<hr class='layer-separator' style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
+
 		var gnsLayer = new L.layerJSON({
 			url: "https://apps.gov.bc.ca/pub/bcgnws/names/official/inside"
 				+ "?itemsPerPage=50&sortBy=name&outputFormat=json&outputSRS=4326"
@@ -1391,7 +1403,7 @@
 		
 		var parcelIdLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
 			{
-				maxZoom: 20,
+				minZoom: 16,
 				maxFeatures: 200,
 				styles: 7834,
 				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
@@ -1402,7 +1414,7 @@
 
 		var parcelLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
 			{
-				maxZoom: 20,
+				minZoom: 16,
 				styles: 5898,
 				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
 				transparent: true,
@@ -1410,6 +1422,25 @@
 			});
 		overlays['ParcelMap BC - Outlined'] = parcelLayer;
 
+		var muniLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP/ows?SERVICE=WMS&',
+			{
+				maxZoom: 20,
+				styles: 410,
+				layers: 'pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['Municipalities - Outlined'] = muniLayer;
+
+		var edLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.EBC_PROV_ELECTORAL_DIST_SVW/ows?SERVICE=WMS&',
+			{
+				maxZoom: 20,
+				styles: 424,
+				layers: 'pub:WHSE_ADMIN_BOUNDARIES.EBC_PROV_ELECTORAL_DIST_SVW',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['Provincial Electoral Districts - Current'] = edLayer;
 		
 		var draLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/ows?',
 			{
@@ -1433,7 +1464,7 @@
 					success: callback
 				});
 			},
-			minZoom: 14,
+			minZoom: 16,
 			caching: false,
 			propertyItems: "features",
 			propertyId: null,
@@ -1671,7 +1702,9 @@
 		});
 		overlays["Ferry Terminals"] = ferryTerminalLayer;
 
-				var trafficLayer = new L.layerJSON({
+		overlays["<hr class='layer-separator' style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
+		
+		var trafficLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=TF&departure={departure}&bbox={lon1},{lat1},{lon2},{lat2}",
 			callData: function(bbox, callback) {
 				return jQuery.ajax({
@@ -1738,6 +1771,28 @@
 			getAndAddTestResults(queryParams.get('test_results'));
 		}
 		var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+		// Remove the blank layer checkbox
+		setTimeout(() => {
+		  const separators = document.querySelectorAll(
+		    ".leaflet-control-layers-overlays label hr.layer-separator"
+		  );
+		
+		  separators.forEach(hr => {
+		    const label = hr.closest("label");
+		    if (!label) return;
+		
+		    const checkbox = label.querySelector("input[type='checkbox']");
+		    if (checkbox) checkbox.remove();
+		
+		    // Clean up any empty text nodes leftover
+		    label.childNodes.forEach(node => {
+		      if (node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) {
+		        node.remove();
+		      }
+		    });
+		  });
+		}, 50);
 
 		// turn restriction visualition markers
 		var turnMarkers = [];

@@ -49,10 +49,13 @@
 		#tabs {
 			height: 100%;
 			width: 425px;
-			background-color: transparent;
+			background-color: white;
 			display: flex;
 			flex-direction: column;
 			flex-wrap: nowrap;
+			overflow-y: auto;
+			overflow-x: hidden;
+			min-height: 0;
 		}
 		#hideButton {
 			border-color: lightSlateGrey;
@@ -91,11 +94,12 @@
 			background-color: white;
 			border-right: 1px solid lightSlateGrey;
 			flex: 1 1 1px;
-			overflow: hidden;
+			overflow: visible;
+			min-height: 0;
 		}
 		.tab-pane {
 			padding: 10px;
-			height: 100%;
+			height: auto;
 		}
 		.tag-input-group {
 			vertical-align: top;
@@ -200,11 +204,11 @@
 		}
 		#routerList {
 			flex: 0 0 auto;
-			overflow-y: scroll;
+			overflow-y: auto;
 			border: 1px solid LightSteelBlue;
 			border-radius: 4px 0px 0px 4px;
 			padding: 2px;
-			max-height: 35%;
+			max-height: 200px;
 			margin-bottom: 4px;
 		}
 		button.reorder {
@@ -282,7 +286,7 @@
 			border-left: 2px dashed white;
 		}
 		#directions {
-			overflow-y: scroll;
+			overflow-y: visible;
 		}
 		.direction {
 			padding: 5px;
@@ -370,7 +374,13 @@
 			width: 25px;
 			text-align: center;
 		}
-
+	    /* Keep only the <hr> visible */
+	    .leaflet-control-layers .layer-separator hr {
+	        margin: 6px 0;
+	        border: 0;
+	        border-top: 1px solid #ccc;
+	        pointer-events: none;
+	    }
 		/* For leaflet-zoom-min.js */
 		.leaflet-control-zoom-min {
 			text-indent: -999em;
@@ -1215,17 +1225,7 @@
 				layers: '0'
 			});
 		baseLayers['BC Topographic Base'] = bcTopoBaseLayer;
-
-		var trimLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/pub/wms',
-			{
-				maxZoom: 20,
-				layers: 'pub:WHSE_BASEMAPPING.TRIM_WATER_LINES,pub:WHSE_BASEMAPPING.TRIM_TRANSPORTATION_LINES,pub:WHSE_BASEMAPPING.TRIM_WATER_POINTS,pub:WHSE_BASEMAPPING.TRIM_TRANSPORTATION_POINTS,pub:WHSE_BASEMAPPING.TRIM_CONTOUR_POINTS',
-				styles: '3345,3334,,3344,3333,3332',
-				format: 'image/png',
-				transparent: true
-			});
-		overlays['TRIM'] = trimLayer;
-
+		
 		var siteLayer = new L.layerJSON({
 			url: gcApi + "sites/within.json?excludeUnits=true&brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
 			minZoom: 14,
@@ -1346,7 +1346,7 @@
 
 		var occLayer = new L.layerJSON({
 			url: gcApi + "occupants/within.json?brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
-			minZoom: 1,
+			minZoom: 14,
 			caching: false,
 			propertyItems: "features",
 			propertyId: "properties.fullAddress",
@@ -1380,35 +1380,7 @@
 		});
 		overlays["Intersections"] = intLayer;
 
-		var parcelIdLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
-			{
-				maxZoom: 20,
-				maxFeatures: 200,
-				styles: 7834,
-				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
-				transparent: true,
-				format: 'image/png'
-			});
-		overlays['ParcelMap BC - Labels - PID'] = parcelIdLayer;
-
-		var parcelLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
-			{
-				maxZoom: 20,
-				styles: 5898,
-				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
-				transparent: true,
-				format: 'image/png'
-			});
-		overlays['ParcelMap BC - Outlined'] = parcelLayer;
-
-		var draLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/ows?',
-			{
-				maxZoom: 20,
-				layers: 'pub:WHSE_BASEMAPPING.DRA_DGTL_ROAD_ATLAS_MPAR_SP',
-				transparent: true,
-				format: 'image/png'
-			});
-		overlays['BC Digital Road Atlas'] = draLayer;
+    	overlays["<hr class='layer-separator' style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
 
 		var gnsLayer = new L.layerJSON({
 			url: "https://apps.gov.bc.ca/pub/bcgnws/names/official/inside"
@@ -1428,7 +1400,169 @@
 			}
 		});
 		overlays['BC Geographical Names'] = gnsLayer;
+		
+		var parcelIdLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
+			{
+				minZoom: 16,
+				maxFeatures: 200,
+				styles: 7834,
+				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['ParcelMap BC - Labels - PID'] = parcelIdLayer;
 
+		var parcelLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
+			{
+				minZoom: 16,
+				styles: 5898,
+				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['ParcelMap BC - Outlined'] = parcelLayer;
+
+		var muniLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP/ows?SERVICE=WMS&',
+			{
+				maxZoom: 20,
+				styles: 410,
+				layers: 'pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['Municipalities - Outlined'] = muniLayer;
+
+		var edLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.EBC_PROV_ELECTORAL_DIST_SVW/ows?SERVICE=WMS&',
+			{
+				maxZoom: 20,
+				styles: 424,
+				layers: 'pub:WHSE_ADMIN_BOUNDARIES.EBC_PROV_ELECTORAL_DIST_SVW',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['Provincial Electoral Districts - Current'] = edLayer;
+		
+		var draLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/ows?',
+			{
+				maxZoom: 20,
+				layers: 'pub:WHSE_BASEMAPPING.DRA_DGTL_ROAD_ATLAS_MPAR_SP',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['BC Digital Road Atlas'] = draLayer;
+
+		var segIdLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=ID&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'ID',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 16,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			buildIcon: function(data) {
+				return getNavInfoIcon(data.properties);
+			}
+		});
+		overlays["Internal Segment Ids"] = segIdLayer;
+		
+		var itnHardRestrictionLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=HR&restrictionSource=ITN&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'HR',
+						restrictionSource: 'ITN',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 10,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			buildIcon: function(data) {
+				return getNavInfoIcon(data.properties);
+			}
+		});
+		overlays["ITN Hard Restrictions"] = itnHardRestrictionLayer;
+
+		var rdmHardRestrictionLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=HR&restrictionSource=RDMbbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'HR',
+						restrictionSource: 'RDM',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 10,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			buildIcon: function(data) {
+				return getNavInfoIcon(data.properties);
+			}
+		});
+		overlays["RDM Hard Restrictions"] = rdmHardRestrictionLayer;		
+	
+		
+		var deadEndLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=DE&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'DE',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 10,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			dataToMarker: function(data) {
+				return L.GeoJSON.geometryToLayer(data,  {
+						color: 'purple',
+						lineCap: 'butt',
+						weight: 2,
+						dashArray: '3 3'
+				});
+			}
+		});
+		overlays["Dead Ends"] = deadEndLayer;
+		
 		var impactorLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=IMP&bbox={lon1},{lat1},{lon2},{lat2}",
 			callData: function(bbox, callback) {
@@ -1500,85 +1634,6 @@
 		});
 		overlays["Navigation Info"] = navInfoLayer;
 
-		var itnHardRestrictionLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=HR&restrictionSource=ITN&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'HR',
-						restrictionSource: 'ITN',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 10,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function(data) {
-				return getNavInfoIcon(data.properties);
-			}
-		});
-		overlays["ITN Hard Restrictions"] = itnHardRestrictionLayer;
-
-		var rdmHardRestrictionLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=HR&restrictionSource=RDMbbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'HR',
-						restrictionSource: 'RDM',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 10,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function(data) {
-				return getNavInfoIcon(data.properties);
-			}
-		});
-		overlays["RDM Hard Restrictions"] = rdmHardRestrictionLayer;
-
-		var eventLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=EV&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'EV',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 4,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function(data) {
-				return getNavInfoIcon(data.properties);
-			}
-		});
-		overlays["Open511 Events (demo only)"] = eventLayer;
 
 		var truckRouteLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=TRK&bbox={lon1},{lat1},{lon2},{lat2}",
@@ -1610,74 +1665,6 @@
 			}
 		});
 		overlays["Truck Routes"] = truckRouteLayer;
-
-		var deadEndLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=DE&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'DE',
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 10,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			dataToMarker: function(data) {
-				return L.GeoJSON.geometryToLayer(data,  {
-						color: 'purple',
-						lineCap: 'butt',
-						weight: 2,
-						dashArray: '3 3'
-				});
-			}
-		});
-		overlays["Dead Ends"] = deadEndLayer;
-
-		var trafficLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=TF&departure={departure}&bbox={lon1},{lat1},{lon2},{lat2}",
-			callData: function(bbox, callback) {
-				return jQuery.ajax({
-					url: routeApi + "navInfo.json?" + routeQuery,
-					headers: routeHeaders,
-					data: {
-						types: 'TF',
-						departure: date2String($('#time').timepicker('getTime', $('#date').datepicker('getDate'))),
-						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
-					},
-					success: callback
-				});
-			},
-			minZoom: 13,
-			caching: false,
-			propertyItems: "features",
-			propertyId: null,
-			propertyTitle: "properties.detail",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			dataToMarker: function(data) {
-				return L.GeoJSON.geometryToLayer(data);
-			},
-			onEachMarker: function(feature, layer) {
-				if(feature.properties.subType == "SLOWEST") {
-					color = '#FF0000';
-				} else if(feature.properties.subType == "SLOWER") {
-					color = '#FF6600';
-				} else if(feature.properties.subType == "SLOW") {
-					color = '#FFAA00';
-				}
-				layer.setStyle({color:color, weight:4, opacity: 0.75});
-			}
-		});
-		overlays["Traffic (demo only)"] = trafficLayer;
 
 		var ferryTerminalLayer = new L.layerJSON({
 			callData: function(bbox, callback) {
@@ -1715,20 +1702,59 @@
 		});
 		overlays["Ferry Terminals"] = ferryTerminalLayer;
 
-		var segIdLayer = new L.layerJSON({
-			//url: routeApi + "navInfo.json?types=ID&bbox={lon1},{lat1},{lon2},{lat2}",
+		overlays["<hr class='layer-separator' style='margin:6px 0;border:0;border-top:1px solid #ccc;pointer-events:none;'>"] = L.layerGroup();
+		
+		var trafficLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=TF&departure={departure}&bbox={lon1},{lat1},{lon2},{lat2}",
 			callData: function(bbox, callback) {
 				return jQuery.ajax({
 					url: routeApi + "navInfo.json?" + routeQuery,
 					headers: routeHeaders,
 					data: {
-						types: 'ID',
+						types: 'TF',
+						departure: date2String($('#time').timepicker('getTime', $('#date').datepicker('getDate'))),
 						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
 					},
 					success: callback
 				});
 			},
-			minZoom: 12,
+			minZoom: 13,
+			caching: false,
+			propertyItems: "features",
+			propertyId: null,
+			propertyTitle: "properties.detail",
+			locAsGeoJSON: true,
+			propertyLoc: "geometry.coordinates",
+			dataToMarker: function(data) {
+				return L.GeoJSON.geometryToLayer(data);
+			},
+			onEachMarker: function(feature, layer) {
+				if(feature.properties.subType == "SLOWEST") {
+					color = '#FF0000';
+				} else if(feature.properties.subType == "SLOWER") {
+					color = '#FF6600';
+				} else if(feature.properties.subType == "SLOW") {
+					color = '#FFAA00';
+				}
+				layer.setStyle({color:color, weight:4, opacity: 0.75});
+			}
+		});
+		overlays["Traffic (demo only)"] = trafficLayer;
+
+		var eventLayer = new L.layerJSON({
+			//url: routeApi + "navInfo.json?types=EV&bbox={lon1},{lat1},{lon2},{lat2}",
+			callData: function(bbox, callback) {
+				return jQuery.ajax({
+					url: routeApi + "navInfo.json?" + routeQuery,
+					headers: routeHeaders,
+					data: {
+						types: 'EV',
+						bbox: bbox[0][1] + ',' + bbox[0][0] + ',' + bbox[1][1] + ',' + bbox[1][0]
+					},
+					success: callback
+				});
+			},
+			minZoom: 4,
 			caching: false,
 			propertyItems: "features",
 			propertyId: null,
@@ -1739,12 +1765,34 @@
 				return getNavInfoIcon(data.properties);
 			}
 		});
-		overlays["Internal Segment Ids"] = segIdLayer;
-
+		overlays["Open511 Events (demo only)"] = eventLayer;
+		
 		if(queryParams.get('test_results')) {
 			getAndAddTestResults(queryParams.get('test_results'));
 		}
 		var layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+		// Remove the blank layer checkbox
+		setTimeout(() => {
+		  const separators = document.querySelectorAll(
+		    ".leaflet-control-layers-overlays label hr.layer-separator"
+		  );
+		
+		  separators.forEach(hr => {
+		    const label = hr.closest("label");
+		    if (!label) return;
+		
+		    const checkbox = label.querySelector("input[type='checkbox']");
+		    if (checkbox) checkbox.remove();
+		
+		    // Clean up any empty text nodes leftover
+		    label.childNodes.forEach(node => {
+		      if (node.nodeType === Node.TEXT_NODE && !node.textContent.trim()) {
+		        node.remove();
+		      }
+		    });
+		  });
+		}, 50);
 
 		// turn restriction visualition markers
 		var turnMarkers = [];

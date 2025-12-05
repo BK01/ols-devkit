@@ -1441,6 +1441,16 @@
 				format: 'image/png'
 			});
 		overlays['Provincial Electoral Districts - Current'] = edLayer;
+
+		var irLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.CLAB_INDIAN_RESERVES/ows?SERVICE=WMS&',
+			{
+				maxZoom: 20,
+				styles: '374_375',
+				layers: 'pub:WHSE_ADMIN_BOUNDARIES.CLAB_INDIAN_RESERVES',
+				transparent: true,
+				format: 'image/png'
+			});
+		overlays['Indian Reserves'] = irLayer;
 		
 		var draLayer = L.tileLayer.wms('http://openmaps.gov.bc.ca/geo/ows?',
 			{

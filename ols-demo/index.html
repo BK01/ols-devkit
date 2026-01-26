@@ -1403,7 +1403,7 @@
 		
 		var parcelIdLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
 			{
-				minZoom: 14,
+				minZoom: 16,
 				maxFeatures: 200,
 				styles: 7834,
 				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
@@ -1414,7 +1414,7 @@
 
 		var parcelLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?SERVICE=WMS&',
 			{
-				minZoom:14,
+				minZoom: 16,
 				styles: 5898,
 				layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
 				transparent: true,
@@ -1444,7 +1444,7 @@
 
 		var irLayer = L.tileLayer.wms('https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.CLAB_INDIAN_RESERVES/ows?SERVICE=WMS&',
 			{
-				minZoom:16,
+				minZoom: 9,
 				styles: '374_375',
 				layers: 'pub:WHSE_ADMIN_BOUNDARIES.CLAB_INDIAN_RESERVES',
 				transparent: true,

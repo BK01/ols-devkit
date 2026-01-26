@@ -40,9 +40,9 @@ Example:
             C:\temp\nearestLocationBetweenPairs\
             sample_addresses.csv
             address albers_x albers_y
-            schools_vancouver.csv
+            sample_destinations.csv
             school_nam albers_x albers_y
-            0.3
+            0.025
             3005
             rHmXTRFtYq162zO0A5YkyZlTKdt3EFZO
             schools

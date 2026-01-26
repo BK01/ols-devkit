@@ -33,8 +33,8 @@ Instructions:
 Example:
         python route_salvager.py C:\temp\route_salvager\
                         proximity_results_using_schools.csv
-                        site_Hybrid_geocoder_joined.csv
-                        DAID
+                        complete_address_list.csv
+                        DISSEMINATION_BLOCK_ID
                         FULL_ADDRESS
                         SITE_ALBERS_X
                         SITE_ALBERS_Y
@@ -260,3 +260,4 @@ print(f'Length of dataframe with route not found cases: {len(df_route_not_found)
 print(df_route_not_found['DAID'].value_counts())
 print(f'Length of dataframe with route found cases: {len(df_replacement_addresses)}')
 print(df_replacement_addresses['DAID'].value_counts())
+

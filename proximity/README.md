@@ -14,6 +14,14 @@ This repo contains python scripts (described below) and sample data to perform p
 - *Sample input arguments included at the top of each script.*
 - *BC Route Planner API parameter defaults are listed [here.](https://github.com/BK01/proximity-by-road/blob/main/parameter_default_values.md)*
 
+# third-party libraries
+
+The python scripts listed above require the installation of the following third-party libraries.
+- pandas
+- requests
+- retry
+
+
 # Process Overview
 ![image](https://github.com/user-attachments/assets/2e186f26-ca62-4a07-9c91-adabd3153df6)
 

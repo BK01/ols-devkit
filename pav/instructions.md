@@ -1,12 +1,12 @@
-## BC Physical Address Viewer (KML) — Deprecated
+## BC Physical Address Viewer (KML/KMZ) — Deprecated
 
-The **KML Application - BC Physical Address Viewer (BC PAV) has been deprecated**, is no longer maintained or supported, and will be retired on March 31, 2026.
+The **BC Physical Address Viewer (BC PAV) has been deprecated**, is no longer maintained or supported, and will be retired on March 31, 2026.
 
 ---
 
 ### Downloading Instructions
 
-If you wish to download a copy of the BC PAV in KMZ format (packaged with icons):
+If you wish to download a copy of the BC PAV in **KMZ** format (packaged with icons):
 
 1. Open the following link in a new browser tab:  
    <https://github.com/bcgov/ols-devkit/blob/gh-pages/pav/BCGov_Physical_Address_Viewer.kmz>
@@ -15,7 +15,7 @@ If you wish to download a copy of the BC PAV in KMZ format (packaged with icons)
 
 ---
 
-If you wish to download a copy of the BC PAV in KML format:
+If you wish to download a copy of the BC PAV in **KML** format:
 
 1. Open the following link in a new browser tab:  
    <https://github.com/bcgov/ols-devkit/blob/gh-pages/pav/BCGov_Physical_Address_Viewer.kml>

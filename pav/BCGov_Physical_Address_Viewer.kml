@@ -21,20 +21,20 @@
 			<visibility>0</visibility>
        <Snippet maxLines="0"></Snippet>
 			<description><![CDATA[
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/frontDoorPoint_high.png" height="36" width="36"> front door point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/intersectionPoint_high.png" height="36" width="36"> intersection point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/localityPoint_coarse.png" height="36" width="36"> locality point - coarse accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/parcelPoint_high.png" height="36" width="36"> parcel point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/parcelPoint_medium.png" height="36" width="36"> parcel point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/provincePoint_coarse.png" height="36" width="36"> province point - coarse accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/rooftopPoint_high.png" height="36" width="36"> rooftop point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_high.png" height="36" width="36"> routing point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_medium.png" height="36" width="36"> routing point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_low.png" height="36" width="36"> routing point - low accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/streetPoint_coarse.png" height="36" width="36"> street point - coarse accuracy<br>
+		<img src="icons/accessPoint_high.png" height="36" width="36"> access point - high accuracy<br>
+		<img src="icons/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
+		<img src="icons/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
+		<img src="icons/frontDoorPoint_high.png" height="36" width="36"> front door point - high accuracy<br>
+		<img src="icons/intersectionPoint_high.png" height="36" width="36"> intersection point - high accuracy<br>
+		<img src="icons/localityPoint_coarse.png" height="36" width="36"> locality point - coarse accuracy<br>
+		<img src="icons/parcelPoint_high.png" height="36" width="36"> parcel point - high accuracy<br>
+		<img src="icons/parcelPoint_medium.png" height="36" width="36"> parcel point - medium accuracy<br>
+		<img src="icons/provincePoint_coarse.png" height="36" width="36"> province point - coarse accuracy<br>
+		<img src="icons/rooftopPoint_high.png" height="36" width="36"> rooftop point - high accuracy<br>
+		<img src="icons/routingPoint_high.png" height="36" width="36"> routing point - high accuracy<br>
+		<img src="icons/routingPoint_medium.png" height="36" width="36"> routing point - medium accuracy<br>
+		<img src="icons/routingPoint_low.png" height="36" width="36"> routing point - low accuracy<br>
+		<img src="icons/streetPoint_coarse.png" height="36" width="36"> street point - coarse accuracy<br>
 
 <br> <i><b>Positional Accuracy Terms </i></b><br>
 <i><b>high - </i></b>observed or measured using GPS or survey instruments, or digitized off imagery with a resolution of 1m or better<br>
@@ -336,20 +336,20 @@
 
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#frontDoorPoint"> front door point</a>
       <br><br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/frontDoorPoint_high.png" height="36" width="36"> front door point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/intersectionPoint_high.png" height="36" width="36"> intersection point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/localityPoint_coarse.png" height="36" width="36"> locality point - coarse accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/parcelPoint_high.png" height="36" width="36"> parcel point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/parcelPoint_medium.png" height="36" width="36"> parcel point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/provincePoint_coarse.png" height="36" width="36"> province point - coarse accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/rooftopPoint_high.png" height="36" width="36"> rooftop point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_high.png" height="36" width="36"> routing point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_medium.png" height="36" width="36"> routing point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_low.png" height="36" width="36"> routing point - low accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/streetPoint_coarse.png" height="36" width="36"> street point - coarse accuracy<br>
+		<img src="icons/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
+		<img src="icons/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
+		<img src="icons/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
+		<img src="icons/frontDoorPoint_high.png" height="36" width="36"> front door point - high accuracy<br>
+		<img src="icons/intersectionPoint_high.png" height="36" width="36"> intersection point - high accuracy<br>
+		<img src="icons/localityPoint_coarse.png" height="36" width="36"> locality point - coarse accuracy<br>
+		<img src="icons/parcelPoint_high.png" height="36" width="36"> parcel point - high accuracy<br>
+		<img src="icons/parcelPoint_medium.png" height="36" width="36"> parcel point - medium accuracy<br>
+		<img src="icons/provincePoint_coarse.png" height="36" width="36"> province point - coarse accuracy<br>
+		<img src="icons/rooftopPoint_high.png" height="36" width="36"> rooftop point - high accuracy<br>
+		<img src="icons/routingPoint_high.png" height="36" width="36"> routing point - high accuracy<br>
+		<img src="icons/routingPoint_medium.png" height="36" width="36"> routing point - medium accuracy<br>
+		<img src="icons/routingPoint_low.png" height="36" width="36"> routing point - low accuracy<br>
+		<img src="icons/streetPoint_coarse.png" height="36" width="36"> street point - coarse accuracy<br>
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>
 <i><b>high - </i></b>observed or measured using GPS or survey instruments, or digitized off imagery with a resolution of 1m or better<br>
@@ -390,13 +390,13 @@
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#accessPoint">access points</a>
             
 <br><br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/frontDoorPoint_high.png" height="36" width="36"> front door point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/parcelPoint_high.png" height="36" width="36"> parcel point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/parcelPoint_medium.png" height="36" width="36"> parcel point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/rooftopPoint_high.png" height="36" width="36"> rooftop point - high accuracy<br>
+		<img src="icons/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
+		<img src="icons/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
+		<img src="icons/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
+		<img src="icons/frontDoorPoint_high.png" height="36" width="36"> front door point - high accuracy<br>
+		<img src="icons/parcelPoint_high.png" height="36" width="36"> parcel point - high accuracy<br>
+		<img src="icons/parcelPoint_medium.png" height="36" width="36"> parcel point - medium accuracy<br>
+		<img src="icons/rooftopPoint_high.png" height="36" width="36"> rooftop point - high accuracy<br>
 
 
 <br> <i><b>Positional Accuracy Terms </i></b><br>
@@ -444,13 +444,13 @@
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#accessPoint">access points</a>
             
 <br><br>
-  		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/frontDoorPoint_high.png" height="36" width="36"> front door point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/parcelPoint_high.png" height="36" width="36"> parcel point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/parcelPoint_medium.png" height="36" width="36"> parcel point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/rooftopPoint_high.png" height="36" width="36"> rooftop point - high accuracy<br>
+  		<img src="icons/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
+		<img src="icons/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
+		<img src="icons/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
+		<img src="icons/frontDoorPoint_high.png" height="36" width="36"> front door point - high accuracy<br>
+		<img src="icons/parcelPoint_high.png" height="36" width="36"> parcel point - high accuracy<br>
+		<img src="icons/parcelPoint_medium.png" height="36" width="36"> parcel point - medium accuracy<br>
+		<img src="icons/rooftopPoint_high.png" height="36" width="36"> rooftop point - high accuracy<br>
            
 <br> <i><b>Positional Accuracy Terms </i></b><br>
 <i><b>high - </i></b>observed or measured using GPS or survey instruments, or digitized off imagery with a resolution of 1m or better<br>
@@ -485,9 +485,9 @@
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#accessPoint">access points</a> of site addresses
             
 <br><br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
+		<img src="icons/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
+		<img src="icons/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
+		<img src="icons/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>
 <i><b>high - </i></b>observed or measured using GPS or survey instruments, or digitized off imagery with a resolution of 1m or better<br>
@@ -521,9 +521,9 @@
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#accessPoint">access points</a> of site addresses
             
 <br><br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
+		<img src="icons/accessPoint_high.png" height=36 width=36> access point - high accuracy<br>
+		<img src="icons/accessPoint_medium.png" height="36" width="36"> access point - medium accuracy<br>
+		<img src="icons/accessPoint_low.png" height="36" width="36"> access point - low accuracy<br>
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>
 <i><b>high - </i></b>observed or measured using GPS or survey instruments, or digitized off imagery with a resolution of 1m or better<br>
@@ -557,9 +557,9 @@
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#routingPoint">routing points</a> of site addresses
             
 <br><br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_high.png" height="36" width="36"> routing point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_medium.png" height="36" width="36"> routing point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_low.png" height="36" width="36"> routing point - low accuracy<br>
+		<img src="icons/routingPoint_high.png" height="36" width="36"> routing point - high accuracy<br>
+		<img src="icons/routingPoint_medium.png" height="36" width="36"> routing point - medium accuracy<br>
+		<img src="icons/routingPoint_low.png" height="36" width="36"> routing point - low accuracy<br>
                 
 <br> <i><b>Positional Accuracy Terms </i></b><br>
 <i><b>high - </i></b>observed or measured using GPS or survey instruments, or digitized off imagery with a resolution of 1m or better<br>
@@ -594,9 +594,9 @@
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#routingPoint">routing points</a> of site addresses
             
 <br><br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_high.png" height="36" width="36"> routing point - high accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_medium.png" height="36" width="36"> routing point - medium accuracy<br>
-		<img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/routingPoint_low.png" height="36" width="36"> routing point - low accuracy<br>
+		<img src="icons/routingPoint_high.png" height="36" width="36"> routing point - high accuracy<br>
+		<img src="icons/routingPoint_medium.png" height="36" width="36"> routing point - medium accuracy<br>
+		<img src="icons/routingPoint_low.png" height="36" width="36"> routing point - low accuracy<br>
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>
 <i><b>high - </i></b>observed or measured using GPS or survey instruments, or digitized off imagery with a resolution of 1m or better<br>
@@ -631,7 +631,7 @@
  
 
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#intersection">intersections</a> in BC (e.g., Douglas St and Yates St, Victoria, BC)
-        <br><br><img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
+        <br><br><img src="icons/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
         <br> <i><b>Positional Accuracy Terms </i></b><br>
         <i><b>high - </i></b>observed or measured using GPS or survey instruments, or digitized off imagery with a resolution of 1m or better<br>
         <br> credit for intersection icon:<br> <b> Maps Icons Collection </b> https://mapicons.nicolasmollet.com
@@ -653,7 +653,7 @@
 
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#intersection">intersections</a> connected to more than one road segment
             
-<br><br><img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
+<br><br><img src="icons/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
 
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>
@@ -685,7 +685,7 @@
 
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#intersection">intersections</a> connected to one road segment
             
-<br><br><img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
+<br><br><img src="icons/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
 
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>
@@ -717,7 +717,7 @@
 
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#intersection">intersections</a> connected to two road segments
             
-<br><br><img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
+<br><br><img src="icons/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
 
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>
@@ -749,7 +749,7 @@
 
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#intersection">intersections</a> connected to three road segments
             
-<br><br><img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
+<br><br><img src="icons/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
 
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>
@@ -781,7 +781,7 @@
 
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#intersection">intersections</a> connected to four road segments
             
-<br><br><img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
+<br><br><img src="icons/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
 
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>
@@ -813,7 +813,7 @@
 
  <A HREF="https://github.com/bcgov/ols-geocoder/blob/gh-pages/glossary.md#intersection">intersections</a> connected to five or more road segments
             
-<br><br><img src="https://openmaps.gov.bc.ca/kml/icons/geocoder/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
+<br><br><img src="icons/intersectionPoint_high.png" height=36 width=36> intersection point - high accuracy<br>
 
             
 <br> <i><b>Positional Accuracy Terms </i></b><br>

@@ -1,6 +1,6 @@
 ## BC Physical Address Viewer (KML) — Deprecated
 
-The **BC Physical Address Viewer KML application** has been **deprecated** and is no longer maintained or supported.
+The **KML Application - BC Physical Address Viewer has been deprecated** and is no longer maintained or supported, and will be retired on March 31, 2026.
 
 ### Downloading the KML File
 

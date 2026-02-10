@@ -6,7 +6,7 @@ The **BC Physical Address Viewer (BC PAV) has been deprecated**, is no longer ma
 
 ### Downloading Instructions
 
-If you wish to download a copy of the BC PAV in **KMZ** format (packaged with icons):
+If you wish to download a copy of the BC PAV in <u>**KMZ**</u> format (packaged with icons):
 
 1. Open the following link in a new browser tab:  
    <https://github.com/bcgov/ols-devkit/blob/gh-pages/pav/BCGov_Physical_Address_Viewer.kmz>

@@ -1246,44 +1246,52 @@
 		});
 		overlays["Addresses – parcel point (excluding units)"] = siteLayer;
 		
-    // Create the raw L.layerJSON layer (unchanged)
-    var siteLayer = new L.layerJSON({
-        url: gcApi + "sites/within.json?excludeUnits=true&brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
-        minZoom: 14,
-        caching: false,
-        propertyItems: "features",
-        propertyId: "properties.fullAddress",
-        propertyTitle: "properties.fullAddress",
-        locAsGeoJSON: true,
-        propertyLoc: "geometry.coordinates",
-        buildIcon: function() {
-            return siteIcon;
-        },
-        onEachMarker: function(feature, marker) {
-            marker.bindPopup(makePopupText(feature.properties, feature.geometry));
-        }
-    });
-    
-    // Create a MarkerClusterGroup
-    var siteClusterLayer = L.markerClusterGroup({
-        spiderfyOnMaxZoom: true,
-        showCoverageOnHover: false,
-        zoomToBoundsOnClick: true,
-        disableClusteringAtZoom: 18
-    });
-    
-    // When siteLayer loads markers, add them into the cluster group
-    siteLayer.on('layeradd', function(e) {
-        siteClusterLayer.addLayer(e.layer);
-    });
-    
-    // Optional: clear clusters when siteLayer refreshes (important for bbox reload)
-    siteLayer.on('loading', function() {
-        siteClusterLayer.clearLayers();
-    });
-    
-    // Expose the CLUSTER layer to the layer control instead
-    overlays["Addresses – parcel point (excluding units)"] = siteClusterLayer;
+		// Original dynamic JSON layer (DO NOT remove this)
+		var siteLayer = new L.layerJSON({
+		    url: gcApi + "sites/within.json?excludeUnits=true&brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
+		    minZoom: 14,
+		    caching: false,
+		    propertyItems: "features",
+		    propertyId: "properties.fullAddress",
+		    propertyTitle: "properties.fullAddress",
+		    locAsGeoJSON: true,
+		    propertyLoc: "geometry.coordinates",
+		    buildIcon: function() {
+		        return siteIcon;
+		    },
+		    onEachMarker: function(feature, marker) {
+		        marker.bindPopup(makePopupText(feature.properties, feature.geometry));
+		    }
+		});
+		
+		// Create cluster group
+		var siteClusterLayer = L.markerClusterGroup({
+		    spiderfyOnMaxZoom: true,
+		    showCoverageOnHover: false,
+		    zoomToBoundsOnClick: true,
+		    disableClusteringAtZoom: 18
+		});
+		
+		// IMPORTANT: Add siteLayer to map so it can fetch data
+		map.addLayer(siteLayer);
+		
+		// When siteLayer adds a marker, move it into the cluster group
+		siteLayer.on('layeradd', function(e) {
+		    siteClusterLayer.addLayer(e.layer);
+		});
+		
+		// Clear clusters before reload
+		siteLayer.on('loading', function() {
+		    siteClusterLayer.clearLayers();
+		});
+		
+		// Remove raw markers so they don't appear twice
+		siteLayer.on('layeradd', function(e) {
+		    siteLayer.removeLayer(e.layer);
+		});
+		
+		// Expose ONLY the clustered layer in the control
+		overlays["Addresses – parcel point (excluding units)"] = siteClusterLayer;
 
 		var apLayer = new L.layerJSON({
 			url: gcApi + "sites/within.json"

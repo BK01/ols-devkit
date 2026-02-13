@@ -1248,25 +1248,37 @@
 
 		});
 		overlays["Addresses – parcel point (excluding units)"] = siteLayer;
+
+		// A cluster group that only spiderfies (no clustering)
+		var siteUnitsSpiderfy = L.markerClusterGroup({
+		    maxClusterRadius: 1,            // disables clustering but keeps spiderfy
+		    spiderfyOnEveryZoom: true,
+		    spiderfyDistanceMultiplier: 1.5
+		});
 		
 		var siteLayerUnits = new L.layerJSON({
-			url: gcApi + "sites/within.json?excludeUnits=false&brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
-			minZoom: 14,
-			caching: false,
-			propertyItems: "features",
-			propertyId: "properties.fullAddress",
-			propertyTitle: "properties.fullAddress",
-			locAsGeoJSON: true,
-			propertyLoc: "geometry.coordinates",
-			buildIcon: function() {
-				return siteIcon;
-			},
-			onEachMarker: function(feature, marker) {
-				marker.bindPopup(makePopupText(feature.properties,feature.geometry));
-			}
-
+		    url: gcApi + "sites/within.json?excludeUnits=false&brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
+		    minZoom: 14,
+		    caching: false,
+		    propertyItems: "features",
+		    propertyId: "properties.fullAddress",
+		    propertyTitle: "properties.fullAddress",
+		    locAsGeoJSON: true,
+		    propertyLoc: "geometry.coordinates",
+		    buildIcon: function() {
+		        return siteIcon;
+		    },
+		    onEachMarker: function(feature, marker) {
+		        marker.bindPopup(makePopupText(feature.properties, feature.geometry));
+		    },
+		    afterLoad: function(loadedLayer) {
+		        siteUnitsSpiderfy.clearLayers();
+		        siteUnitsSpiderfy.addLayer(loadedLayer);
+		    }
 		});
-		overlays["Addresses – parcel point (including units)"] = siteLayerUnits;
+		
+		// Add the spiderfy group to the map via the layer control
+		overlays["Addresses – parcel point (including units)"] = siteUnitsSpiderfy;
 
 		var apLayer = new L.layerJSON({
 			url: gcApi + "sites/within.json"

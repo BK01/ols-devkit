@@ -1252,16 +1252,16 @@
 		});
 		overlays["Addresses – parcel point (excluding units)"] = siteLayer;
 
-		// 1️ Create a layer group for your site units (no clustering)
+		// Create a layer group for your site points, including units (no clustering)
 		var siteUnitsSpiderfy = L.layerGroup();
 
-		// 2️ Initialize OMS on the map
+		// Initialize OMS on the map
 		var oms = new OverlappingMarkerSpiderfier(map, {
 			keepSpiderfied: true,      // stays spiderfied until you click elsewhere
 			nearbyDistance: 20          // pixels between overlapping markers when spiderfied
 		});
 
-		// 3️ Create the layerJSON for site units
+		// Create the layerJSON for site units
 		var siteLayerUnits = new L.layerJSON({
 			url: gcApi + "sites/within.json?excludeUnits=false&brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
 			minZoom: 14,
@@ -1277,15 +1277,15 @@
 			onEachMarker: function(feature, marker) {
 				marker.bindPopup(makePopupText(feature.properties, feature.geometry));
 
-				// 4️ Add each marker to OMS
+				// Add each marker to OMS
 				oms.addMarker(marker);
 
-				// 5️ Also add to the layer group for toggling
+				// Add to the layer group for toggling
 				siteUnitsSpiderfy.addLayer(marker);
 			}
 		});
 
-		// 6️ Add/remove layer when overlay is toggled
+		// Add/remove layer when overlay is toggled
 		siteLayerUnits.on('add', function () {
 			map.addLayer(siteUnitsSpiderfy);
 		});
@@ -1294,7 +1294,7 @@
 			map.removeLayer(siteUnitsSpiderfy);
 		});
 
-		// 7️ Add to overlays for layer control
+		// Add to overlays for layer control
 		overlays["Addresses – parcel point (including units)"] = siteLayerUnits;
 
 		// Optional: OMS events

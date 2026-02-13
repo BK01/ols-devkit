@@ -6,17 +6,26 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<!-- Leaflet -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<!-- MarkerCluster -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+	<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+	<!-- OMS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
+	<!-- Additional Scripts -->
 	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" type="text/css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" type="text/css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet.locatecontrol/0.60.0/L.Control.Locate.min.css" type="text/css" />
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/themes/smoothness/jquery-ui.css" type="text/css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.6/dist/MarkerCluster.css" type="text/css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.6/dist/MarkerCluster.Default.css" type="text/css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.css" type="text/css" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tag-it@2.0.0/css/jquery.tagit.css" type="text/css" />
 	<script src="https://kit.fontawesome.com/17084b3326.js" crossorigin="anonymous"></script>
+
 	<style>
 		/* make the map fullscreen */
 		html, body {
@@ -763,7 +772,6 @@
 		</div>
 	</div>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO2a43ItOYdAuRFcbCSLLn8AQwnMlf6sI"></script>
-	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
 	<script src='https://unpkg.com/leaflet.gridlayer.googlemutant@0.11.2/dist/Leaflet.GoogleMutant.js'></script>
 	<script src="https://cdn.jsdelivr.net/leaflet.locatecontrol/0.60.0/L.Control.Locate.min.js"></script>
 	<script src="https://unpkg.com/esri-leaflet@2.1.4/dist/esri-leaflet.js"
@@ -778,7 +786,6 @@
 	<script src="leaflet-layerjson.js"></script>
 	<script src="leaflet-history.js"></script>
 	<script src="leaflet-zoom-min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.10.2/Sortable.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/timepicker@1.11.12/jquery.timepicker.min.js"></script>
@@ -1244,7 +1251,17 @@
 
 		});
 		overlays["Addresses – parcel point (excluding units)"] = siteLayer;
-		
+
+		// 1️ Create a layer group for your site units (no clustering)
+		var siteUnitsSpiderfy = L.layerGroup();
+
+		// 2️ Initialize OMS on the map
+		var oms = new OverlappingMarkerSpiderfier(map, {
+			keepSpiderfied: true,      // stays spiderfied until you click elsewhere
+			nearbyDistance: 20          // pixels between overlapping markers when spiderfied
+		});
+
+		// 3️ Create the layerJSON for site units
 		var siteLayerUnits = new L.layerJSON({
 			url: gcApi + "sites/within.json?excludeUnits=false&brief=true&bbox={lon1},{lat1},{lon2},{lat2}",
 			minZoom: 14,
@@ -1258,11 +1275,37 @@
 				return siteIcon;
 			},
 			onEachMarker: function(feature, marker) {
-				marker.bindPopup(makePopupText(feature.properties,feature.geometry));
-			}
+				marker.bindPopup(makePopupText(feature.properties, feature.geometry));
 
+				// 4️ Add each marker to OMS
+				oms.addMarker(marker);
+
+				// 5️ Also add to the layer group for toggling
+				siteUnitsSpiderfy.addLayer(marker);
+			}
 		});
+
+		// 6️ Add/remove layer when overlay is toggled
+		siteLayerUnits.on('add', function () {
+			map.addLayer(siteUnitsSpiderfy);
+		});
+
+		siteLayerUnits.on('remove', function () {
+			map.removeLayer(siteUnitsSpiderfy);
+		});
+
+		// 7️ Add to overlays for layer control
 		overlays["Addresses – parcel point (including units)"] = siteLayerUnits;
+
+		// Optional: OMS events
+		oms.addListener('click', function(marker) {
+			marker.openPopup();
+		});
+		oms.addListener('spiderfy', function(markers) {
+			// console.log('spiderfied', markers.length);
+		});
+
+
 
 		var apLayer = new L.layerJSON({
 			url: gcApi + "sites/within.json"

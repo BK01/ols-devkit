@@ -110,6 +110,11 @@
 			padding: 10px;
 			height: auto;
 		}
+		.service-info {
+			margin-top: 20px;
+			padding: 10px;
+			border-top: 1px solid #ccc;
+		}
 		.tag-input-group {
 			vertical-align: top;
 		}
@@ -478,6 +483,11 @@
 							</ul>
 		 				</div>
 						<div id="adminAreaInfo">
+						</div>
+						<div class="service-info">
+							<strong>BC Address Geocoder</strong><br/>
+							Version: <span id="geocoderVersion"></span><br/>
+							Data vintage: <span id="geocoderVintage"></span>
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane" id="tabs-2">
@@ -865,6 +875,42 @@
 			default:
 				routeMethod = 'GET';
 		}
+
+		function loadGeocoderVersionAndVintage() {
+			fetch(gcApi + "addresses.json?addressString=Victoria")
+				.then(response => response.json())
+				.then(data => {
+
+					// Geocoder code version
+					if (data.version) {
+						document.getElementById("geocoderVersion").textContent = data.version;
+					}
+
+					// BaseDataDate
+					if (data.baseDataDate) {
+
+						// Convert ISO date to readable format
+						const date = new Date(data.baseDataDate);
+						const formattedDate = date.toLocaleDateString("en-CA", {
+							year: "numeric",
+							month: "long",
+							day: "numeric"
+						});
+
+						document.getElementById("geocoderVintage").textContent = formattedDate;
+					}
+
+				})
+				.catch(error => {
+					console.error("Error fetching Geocoder metadata:", error);
+					document.getElementById("geocoderVersion").textContent = "Unavailable";
+					document.getElementById("geocoderVintage").textContent = "Unavailable";
+				});
+		}
+		
+		document.addEventListener("DOMContentLoaded", function () {
+			loadGeocoderVersionAndVintage();
+		});
 
 		var routeHeaders = {apiKey: DATABC_APIKEY};
 		var routeQuery = '';

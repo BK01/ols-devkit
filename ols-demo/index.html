@@ -115,6 +115,15 @@
 			padding: 10px;
 			border-top: 1px solid #ccc;
 		}
+		.service-info-rt {
+			margin-top: 20px;
+			padding: 10px;
+			border-top: 1px solid #ccc;
+		}
+		.tight-line {
+			margin-top: 10px;
+			margin-bottom: 0;
+		}
 		.tag-input-group {
 			vertical-align: top;
 		}
@@ -199,7 +208,7 @@
 			z-index: 999;
 			top: 0px;
 			left: 50%;
-      transform: translate(-50%,0);
+            transform: translate(-50%,0);
 			border: 1px solid lightSlateGrey;
 			border-top: none;
 			background-color: white;
@@ -470,15 +479,15 @@
 						<div>
 							<h4>Examples:</h4>
 							<ul>
-	   						<li>1175 Douglas St Victoria BC</li>
-	   						<li>201A 1175 Douglas St Victoria BC</li>
-	   						<li>Victoria BC</li>
-	   						<li>Douglas St and Yates St Victoria BC</li>
-	   						<li>Delta Port Entrance -- Roberts Bank Rd Delta BC</li>
-	   						<li>Delta Creek Bridge --  Terrace BC</li>
-	   						<li>Boston Bar 8 near Boston Bar BC</li>
-	   						<li>Brentwood Bay in Central Saanich BC</li>
-	   						<li>Fairfield in Victoria BC</li>
+	   						<li>1175 Douglas St, Victoria, BC</li>
+	   						<li>201A 1175 Douglas St, Victoria, BC</li>
+	   						<li>Victoria, BC</li>
+	   						<li>Douglas St and Yates St, Victoria, BC</li>
+	   						<li>Delta Port Entrance -- Roberts Bank Rd, Delta, BC</li>
+	   						<li>Delta Creek Bridge --  Terrace, BC</li>
+	   						<li>Boston Bar 8 near Boston Bar, BC</li>
+	   						<li>Brentwood Bay in Central Saanich, BC</li>
+	   						<li>Fairfield in Victoria, BC</li>
 	   						<li>Hwy 1 and Exit 366</li>
 							</ul>
 		 				</div>
@@ -643,6 +652,12 @@
 										</table>
 									</div>
 								</div>
+							</div>
+							<div class="service-info-rt">
+								<strong>BC Route Planner</strong><br/>
+								Version: <span id="routerVersion"></span><br/>
+								Data vintage: <span id="routerVintage"></span>
+								<hr class="tight-line">
 							</div>
 							<div id="routerInfo">
 								<div id="timing" class="timing"></div>
@@ -908,8 +923,44 @@
 				});
 		}
 		
+		function loadRouterVersionAndVintage() {
+			fetch(routeApi + "distance.json?points=-123.369860%2C48.428383%2C-123.369973%2C48.428174&apikey=" + DATABC_APIKEY)
+				.then(response => response.json())
+				.then(data => {
+
+					// Router code version
+					if (data.version) {
+						document.getElementById("routerVersion").textContent = data.version;
+					}
+
+					// roadNetworkTimestamp
+					if (data.roadNetworkTimestamp) {
+
+						// Convert ISO date to readable format
+						const date = new Date(data.roadNetworkTimestamp);
+						const formattedDateRt = date.toLocaleDateString("en-CA", {
+							year: "numeric",
+							month: "long",
+							day: "numeric"
+						});
+
+						document.getElementById("routerVintage").textContent = formattedDateRt;
+					}
+
+				})
+				.catch(error => {
+					console.error("Error fetching Router metadata:", error);
+					document.getElementById("routerVersion").textContent = "Unavailable";
+					document.getElementById("routerVintage").textContent = "Unavailable";
+				});
+		}
+		
 		document.addEventListener("DOMContentLoaded", function () {
 			loadGeocoderVersionAndVintage();
+		});
+
+		document.addEventListener("DOMContentLoaded", function () {
+			loadRouterVersionAndVintage();
 		});
 
 		var routeHeaders = {apiKey: DATABC_APIKEY};

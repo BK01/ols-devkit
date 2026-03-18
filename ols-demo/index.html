@@ -1823,7 +1823,8 @@
 				layer.setStyle({color:color, weight:4, opacity: 0.75});
 			}
 		});
-		overlays["Traffic (demo only)"] = trafficLayer;
+		// uncomment the line below to reactivate the traffic layer
+		//overlays["Traffic (demo only)"] = trafficLayer;
 
 		var eventLayer = new L.layerJSON({
 			//url: routeApi + "navInfo.json?types=EV&bbox={lon1},{lat1},{lon2},{lat2}",
@@ -1849,7 +1850,8 @@
 				return getNavInfoIcon(data.properties);
 			}
 		});
-		overlays["Open511 Events (demo only)"] = eventLayer;
+		// uncomment the line below to reactivate the events layer
+		//overlays["Open511 Events (demo only)"] = eventLayer;
 		
 		if(queryParams.get('test_results')) {
 			getAndAddTestResults(queryParams.get('test_results'));

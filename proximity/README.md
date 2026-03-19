@@ -23,23 +23,35 @@ The python scripts listed above require the installation of the following third-
 
 
 # Process Overview
-<div style="background:#e6e6e6; padding:15px; border:1px solid #ccc; display:inline-block;">
-  <img src="https://github.com/user-attachments/assets/2e186f26-ca62-4a07-9c91-adabd3153df6" alt="image">
-</div>
+<table>
+  <tr>
+    <td style="background:#e6e6e6; padding:15px;">
+      <img src="https://github.com/user-attachments/assets/2e186f26-ca62-4a07-9c91-adabd3153df6" alt="image">
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Figure 1:</strong> Determine the nearest destination point to each origin point based on drive time (1_dist_time_to_nearest_destination.py).</td>
+  </tr>
 
-**Figure 1:** Determine the nearest destination point to each origin point based on drive time (1_dist_time_to_nearest_destination.py).
+  <tr>
+    <td style="background:#e6e6e6; padding:15px;">
+      <img src="https://github.com/user-attachments/assets/7a90a0c1-b04b-4f05-933f-5f664749a07b" alt="route_salvager">
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Figure 2:</strong> If processing a sample of a larger dataset, this script can be used to replace unroutable coordinates with routable coordinates (1b_route_salvager_with_admin_area.py).</td>
+  </tr>
 
-<div style="background:#e6e6e6; padding:15px; border:1px solid #ccc; display:inline-block;">
-  <img src="https://github.com/user-attachments/assets/7a90a0c1-b04b-4f05-933f-5f664749a07b" alt="route_salvager">
-</div>
+  <tr>
+    <td style="background:#e6e6e6; padding:15px;">
+      <img src="https://github.com/user-attachments/assets/753461cd-cb21-4b9c-ada9-58232ad98432" alt="avg_dist_2">
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Figure 3:</strong> Calculate average distance and drive time to each destination point using all nearest origin points (2_avg_dist_time_per_destination.py).</td>
+  </tr>
+</table>
 
-**Figure 2:** If processing a sample of a larger dataset, this script can be used to replace unroutable coordinates with routable coordinates (1b_route_salvager_with_admin_area.py).
-
-<div style="background:#e6e6e6; padding:15px; border:1px solid #ccc; display:inline-block;">
-  <img src="https://github.com/user-attachments/assets/753461cd-cb21-4b9c-ada9-58232ad98432" alt="avg_dist_2">
-</div>
-
-**Figure 3:** Calculate average distance and drive time to each destination point using all nearest origin points (2_avg_dist_time_per_destination.py).
 
 
 # API key request form:

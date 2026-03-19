@@ -28,12 +28,13 @@ The python scripts listed above require the installation of the following third-
 Figure 1: Determine the nearest destination point to each origin point based on drive time (1_dist_time_to_nearest_destination.py).
 
 
-<img width="822" height="442" alt="425550300-7a90a0c1-b04b-4f05-933f-5f664749a07b_v2" src="https://github.com/user-attachments/assets/576a30d8-f8fa-4e13-819e-5ce6add0e3b7" />
+<img width="2833" height="1526" alt="425550300-7a90a0c1-b04b-4f05-933f-5f664749a07b_v3" src="https://github.com/user-attachments/assets/8c4cd77c-a972-43ef-a506-f6f9c52a9be8" />
 
 Figure 2: If processing a sample of a larger dataset, this script can be used to replace unroutable coordinates with routable coordinates (1b_route_salvager_with_admin_area.py).
 
 
-<img width="412" height="442" alt="425553000-753461cd-cb21-4b9c-ada9-58232ad98432_v2" src="https://github.com/user-attachments/assets/f80fe6c2-9c2f-401f-aafa-60bac7365444" />
+
+<img width="1423" height="1526" alt="425553000-753461cd-cb21-4b9c-ada9-58232ad98432_v3" src="https://github.com/user-attachments/assets/0633f79b-00e5-46d0-bbac-1dfca75cbdb7" />
 
 Figure 3: Calculate average distance and drive time to each destination point using all nearest origin points (2_avg_dist_time_per_destination.py)
 

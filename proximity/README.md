@@ -25,7 +25,7 @@ The python scripts listed above require the installation of the following third-
 # Process Overview
 <table>
   <tr>
-    <td style="background:#e6e6e6; padding:15px;">
+    <td style="background:#000000; padding:15px;">
       <img src="https://github.com/user-attachments/assets/2e186f26-ca62-4a07-9c91-adabd3153df6" alt="image">
     </td>
   </tr>
@@ -34,7 +34,7 @@ The python scripts listed above require the installation of the following third-
   </tr>
 
   <tr>
-    <td style="background:#e6e6e6; padding:15px;">
+    <td style="background:#000000; padding:15px;">
       <img src="https://github.com/user-attachments/assets/7a90a0c1-b04b-4f05-933f-5f664749a07b" alt="route_salvager">
     </td>
   </tr>
@@ -43,7 +43,7 @@ The python scripts listed above require the installation of the following third-
   </tr>
 
   <tr>
-    <td style="background:#e6e6e6; padding:15px;">
+    <td style="background:#000000; padding:15px;">
       <img src="https://github.com/user-attachments/assets/753461cd-cb21-4b9c-ada9-58232ad98432" alt="avg_dist_2">
     </td>
   </tr>

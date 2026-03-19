@@ -25,7 +25,7 @@ The python scripts listed above require the installation of the following third-
 # Process Overview
 <table>
   <tr>
-    <td style="padding:15px; border:4px solid #000;">
+    <td style="padding:0; border:40px solid #000;">
       <img src="https://github.com/user-attachments/assets/2e186f26-ca62-4a07-9c91-adabd3153df6" alt="image">
     </td>
   </tr>
@@ -34,7 +34,7 @@ The python scripts listed above require the installation of the following third-
   </tr>
 
   <tr>
-    <td style="padding:15px; border:4px solid #000;">
+    <td style="padding:0; border:40px solid #000;">
       <img src="https://github.com/user-attachments/assets/7a90a0c1-b04b-4f05-933f-5f664749a07b" alt="route_salvager">
     </td>
   </tr>
@@ -43,7 +43,7 @@ The python scripts listed above require the installation of the following third-
   </tr>
 
   <tr>
-    <td style="padding:15px; border:4px solid #000;">
+    <td style="padding:0; border:40px solid #000;">
       <img src="https://github.com/user-attachments/assets/753461cd-cb21-4b9c-ada9-58232ad98432" alt="avg_dist_2">
     </td>
   </tr>
@@ -51,7 +51,6 @@ The python scripts listed above require the installation of the following third-
     <td><strong>Figure 3:</strong> Calculate average distance and drive time to each destination point using all nearest origin points (2_avg_dist_time_per_destination.py).</td>
   </tr>
 </table>
-
 
 
 

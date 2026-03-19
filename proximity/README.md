@@ -23,17 +23,24 @@ The python scripts listed above require the installation of the following third-
 
 
 # Process Overview
-![image](https://github.com/user-attachments/assets/2e186f26-ca62-4a07-9c91-adabd3153df6)
+<img width="2153" height="760" alt="399525015-2e186f26-ca62-4a07-9c91-adabd3153df6_v2" src="https://github.com/user-attachments/assets/03f57fce-e430-4761-80a0-bc59175ec6bb" />
 
-**Figure 1:** Determine the nearest destination point to each origin point based on drive time (1_dist_time_to_nearest_destination.py).
+Figure 1: Determine the nearest destination point to each origin point based on drive time (1_dist_time_to_nearest_destination.py).
 
-![route_salvager](https://github.com/user-attachments/assets/7a90a0c1-b04b-4f05-933f-5f664749a07b)
 
-**Figure 2:** If processing a sample of a larger dataset, this script can be used to replace unroutable coordinates with routable coordinates (1b_route_salvager_with_admin_area.py).
+<img width="2833" height="1526" alt="425550300-7a90a0c1-b04b-4f05-933f-5f664749a07b_v3" src="https://github.com/user-attachments/assets/8c4cd77c-a972-43ef-a506-f6f9c52a9be8" />
 
-![avg_dist_2](https://github.com/user-attachments/assets/753461cd-cb21-4b9c-ada9-58232ad98432)
+Figure 2: If processing a sample of a larger dataset, this script can be used to replace unroutable coordinates with routable coordinates (1b_route_salvager_with_admin_area.py).
 
-**Figure 3:** Calculate average distance and drive time to each destination point using all nearest origin points (2_avg_dist_time_per_destination.py)
+<p align="center">
+  <img 
+    src="https://github.com/user-attachments/assets/0633f79b-00e5-46d0-bbac-1dfca75cbdb7"
+    alt="425553000-753461cd-cb21-4b9c-ada9-58232ad98432_v3"
+    width="50%"
+  />
+</p>
+
+Figure 3: Calculate average distance and drive time to each destination point using all nearest origin points (2_avg_dist_time_per_destination.py)
 
 # API key request form:
 **The BC Route Planner is currently only available for use by B.C. Government Ministries.**

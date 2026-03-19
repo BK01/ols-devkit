@@ -24,17 +24,23 @@ The python scripts listed above require the installation of the following third-
 
 # Process Overview
 <div style="background:#e6e6e6; padding:15px; border:1px solid #ccc; display:inline-block;">
-  ![image](https://github.com/user-attachments/assets/2e186f26-ca62-4a07-9c91-adabd3153df6)
+  <img src="https://github.com/user-attachments/assets/2e186f26-ca62-4a07-9c91-adabd3153df6" alt="image">
 </div>
+
 **Figure 1:** Determine the nearest destination point to each origin point based on drive time (1_dist_time_to_nearest_destination.py).
+
 <div style="background:#e6e6e6; padding:15px; border:1px solid #ccc; display:inline-block;">
-  ![route_salvager](https://github.com/user-attachments/assets/7a90a0c1-b04b-4f05-933f-5f664749a07b)
+  <img src="https://github.com/user-attachments/assets/7a90a0c1-b04b-4f05-933f-5f664749a07b" alt="route_salvager">
 </div>
+
 **Figure 2:** If processing a sample of a larger dataset, this script can be used to replace unroutable coordinates with routable coordinates (1b_route_salvager_with_admin_area.py).
+
 <div style="background:#e6e6e6; padding:15px; border:1px solid #ccc; display:inline-block;">
-  ![avg_dist_2](https://github.com/user-attachments/assets/753461cd-cb21-4b9c-ada9-58232ad98432)
+  <img src="https://github.com/user-attachments/assets/753461cd-cb21-4b9c-ada9-58232ad98432" alt="avg_dist_2">
 </div>
-**Figure 3:** Calculate average distance and drive time to each destination point using all nearest origin points (2_avg_dist_time_per_destination.py)
+
+**Figure 3:** Calculate average distance and drive time to each destination point using all nearest origin points (2_avg_dist_time_per_destination.py).
+
 
 # API key request form:
 **The BC Route Planner is currently only available for use by B.C. Government Ministries.**

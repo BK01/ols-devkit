@@ -23,7 +23,7 @@ The python scripts listed above require the installation of the following third-
 
 
 # Process Overview
-<img width="975" height="342" alt="399525015-2e186f26-ca62-4a07-9c91-adabd3153df6_v2" src="https://github.com/user-attachments/assets/98b30b18-30bb-4252-b312-f20cd3f1bc6e" />
+<img width="2153" height="760" alt="399525015-2e186f26-ca62-4a07-9c91-adabd3153df6_v2" src="https://github.com/user-attachments/assets/03f57fce-e430-4761-80a0-bc59175ec6bb" />
 
 Figure 1: Determine the nearest destination point to each origin point based on drive time (1_dist_time_to_nearest_destination.py).
 

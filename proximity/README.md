@@ -39,7 +39,6 @@ Figure 2: If processing a sample of a larger dataset, this script can be used to
     width="50%"
   />
 </p>
-<img width="1423" height="1526" alt="425553000-753461cd-cb21-4b9c-ada9-58232ad98432_v3" src="https://github.com/user-attachments/assets/0633f79b-00e5-46d0-bbac-1dfca75cbdb7" />
 
 Figure 3: Calculate average distance and drive time to each destination point using all nearest origin points (2_avg_dist_time_per_destination.py)
 
